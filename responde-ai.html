@@ -26,208 +26,311 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #F3E8FF 0%, #FCE7F3 50%, #F0FDF4 100%);
+    background: linear-gradient(135deg, #F3E8FF 0%, #f5f0ff 50%, #FCE7F3 100%);
     min-height: 100vh;
     color: var(--texto);
   }
 
-  /* HEADER */
   header {
     background: linear-gradient(135deg, #7C3AED, #FF1493);
-    padding: 24px 20px 20px; text-align: center; position: relative; overflow: hidden;
-    display: flex; flex-direction: column; align-items: center;
+    padding: 24px 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   header::before {
-    content: ''; position: absolute; inset: 0;
+    content: '';
+    position: absolute;
+    inset: 0;
     background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
-  .header-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; position: relative; z-index: 1; }
-  .header-logo { width: 44px; height: 44px; border-radius: 12px; object-fit: contain; }
-  .header-title { font-size: 1.7rem; color: white; position: relative; z-index: 1; }
-  .header-description { color: rgba(255,255,255,0.85); font-size: 0.85rem; margin-top: 4px; position: relative; z-index: 1; }
-
+  header h1 {
+    font-size: 1.7rem;
+    color: white;
+    position: relative;
+  }
+  header p {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+    margin-top: 4px;
+    position: relative;
+  }
   .btn-config {
-    position: absolute; top: 20px; right: 20px;
-    background: rgba(255,255,255,0.2); border: none; border-radius: 50%;
-    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem; color: white; cursor: pointer; transition: background 0.2s;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
     z-index: 2;
   }
-  .btn-config:active { background: rgba(255,255,255,0.3); }
+  .btn-config:active { transform: scale(0.96); }
 
-  .main { max-width: 600px; margin: 0 auto; padding: 20px 16px 100px; }
-
-  /* CAMPO NOME */
-  .card-nome {
-    background: white; border-radius: var(--radius);
-    padding: 18px 20px; box-shadow: var(--sombra); margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
+  .main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
   }
-  .card-nome label { font-size: 0.82rem; font-weight: 800; color: #6d4ed8; white-space: nowrap; }
+
+  .card-nome {
+    background: white;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--sombra);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-nome label {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--roxo);
+    white-space: nowrap;
+  }
   .card-nome input {
-    flex: 1; border: 2px solid #EDE9FE; border-radius: 10px;
-    padding: 10px 14px; font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem; color: var(--texto); background: var(--cinza-claro);
-    outline: none; transition: border-color 0.2s;
+    flex: 1;
+    border: 2px solid #EDE9FE;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--texto);
+    background: var(--cinza-claro);
+    outline: none;
+    transition: border-color 0.2s;
   }
   .card-nome input:focus { border-color: var(--roxo); }
 
-  /* CATEGORIAS */
   .titulo-secao {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem; color: var(--texto); margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--texto);
+    margin-bottom: 12px;
+    font-weight: 600;
   }
 
   .cats {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
   }
   .cat-btn {
-    padding: 8px 14px; border-radius: 50px;
-    border: 2px solid #EDE9FE; background: white;
-    font-family: 'Poppins', sans-serif; font-size: 0.8rem;
-    font-weight: 700; color: var(--cinza); cursor: pointer;
-    transition: all 0.2s; white-space: nowrap;
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: 2px solid #EDE9FE;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cinza);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
   }
   .cat-btn.ativa {
     background: linear-gradient(135deg, #7C3AED, #FF1493);
-    color: white; border-color: transparent;
+    color: white;
+    border-color: transparent;
   }
 
-  /* CARDS DE RESPOSTA */
   .resposta-card {
-    background: white; border-radius: var(--radius);
-    box-shadow: var(--sombra); margin-bottom: 14px;
-    overflow: hidden; animation: entrar 0.3s ease;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--sombra);
+    margin-bottom: 14px;
+    overflow: hidden;
+    animation: entrar 0.25s ease;
     border-left: 4px solid var(--roxo);
   }
-  @keyframes entrar { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes entrar {
+    from { opacity:0; transform:translateY(8px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .resposta-card.recuperacao { border-left-color:#FF1493; }
+  .resposta-card.atendimento { border-left-color:#7C3AED; }
+  .resposta-card.acompanhamento { border-left-color:#1DD1A1; }
+  .resposta-card.objecoes { border-left-color:#f97316; }
+  .resposta-card.relacionamento { border-left-color:#0ea5e9; }
 
   .resposta-header {
     padding: 12px 16px 0;
-    display: flex; justify-content: space-between; align-items: center;
   }
   .resposta-titulo {
-    font-size: 0.78rem; font-weight: 800;
-    color: #6d4ed8; text-transform: uppercase; letter-spacing: 0.5px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--roxo);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
-
   .resposta-texto {
     padding: 10px 16px 14px;
-    font-size: 0.92rem; color: var(--texto);
-    line-height: 1.75; white-space: pre-wrap; word-break: break-word;
+    font-size: 0.92rem;
+    color: var(--texto);
+    line-height: 1.75;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
-
   .resposta-footer {
     padding: 0 16px 14px;
-    display: flex; gap: 8px;
   }
   .btn-copiar {
-    flex: 1; padding: 10px;
+    width: 100%;
+    padding: 10px;
     background: linear-gradient(135deg, #7C3AED, #FF1493);
-    color: white; border: none; border-radius: 10px;
-    font-family: 'Poppins', sans-serif; font-size: 0.85rem;
-    font-weight: 800; cursor: pointer; transition: all 0.2s;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .btn-copiar.copiado { background: var(--verde); }
-  .btn-copiar:active { transform: scale(0.97); }
+  .btn-copiar.copiado {
+    background: var(--verde);
+  }
+  .btn-copiar:active {
+    transform: scale(0.97);
+  }
 
-  /* COR POR CATEGORIA */
-  .resposta-card.recuperacao { border-left-color: #FF1493; }
-  .resposta-card.atendimento { border-left-color: #7C3AED; }
-  .resposta-card.acompanhamento { border-left-color: #1DD1A1; }
-  .resposta-card.objecoes { border-left-color: #F59E0B; }
-  .resposta-card.relacionamento { border-left-color: #EC4899; }
+  .vazio {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--cinza);
+  }
+  .vazio .emoji {
+    font-size: 3rem;
+    margin-bottom: 12px;
+  }
 
-  /* VAZIO */
-  .vazio { text-align: center; padding: 50px 20px; color: var(--cinza); }
-  .vazio .emoji { font-size: 3rem; margin-bottom: 12px; }
-
-  /* MODAL CONFIG */
-  #tela-config {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.5); z-index: 999;
-    align-items: center; justify-content: center;
+  .config-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:30;
   }
-  .config-box {
-    background: white; border-radius: 24px; padding: 32px;
-    width: 90%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  .config-card{
+    background:#fff;
+    border-radius:20px;
+    padding:24px 20px 20px;
+    width:100%;
+    max-width:320px;
+    box-shadow:0 18px 40px rgba(15,23,42,0.35);
   }
-  .config-titulo { font-size: 1.4rem; font-weight: 800; color: var(--roxo); margin-bottom: 20px; }
-  .config-input {
-    width: 100%; padding: 12px 16px; margin-bottom: 12px;
-    border: 2px solid #EDE9FE; border-radius: 10px;
-    font-family: 'Poppins', sans-serif; font-size: 0.95rem;
-    outline: none; transition: border-color 0.2s;
+  .config-card h2{
+    font-size:1.1rem;
+    margin-bottom:10px;
+    color:var(--roxo);
   }
-  .config-input:focus { border-color: var(--roxo); }
-  .config-btn {
-    width: 100%; padding: 12px; margin-bottom: 8px;
-    background: linear-gradient(135deg, #7C3AED, #FF1493);
-    color: white; border: none; border-radius: 10px;
-    font-family: 'Poppins', sans-serif; font-weight: 700;
-    cursor: pointer; transition: 0.2s;
+  .config-input{
+    width:100%;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid #E5E7EB;
+    font-family:'Poppins',sans-serif;
+    font-size:0.9rem;
+    margin-bottom:10px;
+    background:#F9FAFB;
   }
-  .config-btn:active { transform: scale(0.98); }
-  .config-btn-secondary {
-    background: #F3E8FF; color: var(--roxo);
+  .config-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:999px;
+    background:linear-gradient(135deg,#7C3AED,#FF1493);
+    color:white;
+    font-family:'Poppins',sans-serif;
+    font-size:0.9rem;
+    font-weight:700;
+    margin-top:4px;
+    cursor:pointer;
   }
-  .config-erro { color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-top: 10px; min-height: 20px; }
+  .config-btn-sair{
+    width:100%;
+    padding:9px;
+    border:none;
+    border-radius:999px;
+    background:#fee2e2;
+    color:#b91c1c;
+    font-family:'Poppins',sans-serif;
+    font-size:0.85rem;
+    font-weight:600;
+    margin-top:6px;
+    cursor:pointer;
+  }
+  .config-erro{
+    font-size:0.8rem;
+    color:#b91c1c;
+    margin-top:6px;
+    min-height:16px;
+  }
 </style>
 </head>
-<body>
+<body onload="init()">
 
 <header>
-  <h1>🤖 Responde AI</h1>
-  <p class="header-description">Respostas prontas para WhatsApp</p>
   <button class="btn-config" onclick="showConfig()">⚙️</button>
+  <h1>Responde AI</h1>
+  <p>Respostas prontas para recuperar clientes no WhatsApp</p>
 </header>
 
 <div class="main">
-
-  <!-- NOME -->
   <div class="card-nome">
-    <label>👤 Cliente:</label>
-    <input type="text" id="nome-cliente" placeholder="Digite o nome..." oninput="renderRespostas()">
+    <label>👤 Nome (opcional):</label>
+    <input type="text" id="nome-cliente" placeholder="Digite o nome da cliente..." oninput="renderRespostas()">
   </div>
 
-  <!-- CATEGORIAS -->
   <p class="titulo-secao">Escolha a situação</p>
   <div class="cats">
     <button class="cat-btn ativa" onclick="filtrar('todas', this)">🌸 Todas</button>
-    <button class="cat-btn" onclick="filtrar('recuperacao', this)">👻 Recuperação</button>
+    <button class="cat-btn" onclick="filtrar('recuperacao', this)">📲 Recuperar cliente</button>
     <button class="cat-btn" onclick="filtrar('atendimento', this)">💬 Atendimento</button>
-    <button class="cat-btn" onclick="filtrar('acompanhamento', this)">📦 Acompanhamento</button>
-    <button class="cat-btn" onclick="filtrar('objecoes', this)">🤔 Objeções</button>
+    <button class="cat-btn" onclick="filtrar('acompanhamento', this)">⏱ Acompanhamento</button>
+    <button class="cat-btn" onclick="filtrar('objecoes', this)">🤝 Objeções</button>
     <button class="cat-btn" onclick="filtrar('relacionamento', this)">💝 Relacionamento</button>
   </div>
 
-  <!-- RESPOSTAS -->
   <div id="lista-respostas"></div>
-
 </div>
 
-<!-- MODAL CONFIG -->
-<div id="tela-config">
-  <div class="config-box">
-    <div class="config-titulo">⚙️ Configurações</div>
-
-    <label style="font-size:0.85rem; font-weight:600; color:#7a6c9f; display:block; margin-bottom:8px;">Nova senha</label>
-    <input type="password" id="nova-senha" class="config-input" placeholder="Digite a nova senha" maxlength="20">
-
-    <label style="font-size:0.85rem; font-weight:600; color:#7a6c9f; display:block; margin-bottom:8px;">Confirmar senha</label>
-    <input type="password" id="confirma-senha" class="config-input" placeholder="Confirme a senha" maxlength="20">
-
-    <button class="config-btn" onclick="salvarSenha()">💾 Salvar nova senha</button>
-    <button class="config-btn config-btn-secondary" onclick="sairApp()">🚪 Sair do app</button>
-    <button class="config-btn config-btn-secondary" onclick="hideConfig()" style="background:#E5E7EB; color:#374151;">Cancelar</button>
-
+<div class="config-overlay" id="tela-config">
+  <div class="config-card">
+    <h2>⚙️ Configurações</h2>
+    <label style="font-size:0.85rem;font-weight:600;color:#7C3AED;display:block;margin-bottom:8px">
+      Nova senha:
+    </label>
+    <input class="config-input" type="password" id="nova-senha" placeholder="Digite a nova senha" maxlength="20">
+    <label style="font-size:0.85rem;font-weight:600;color:#7C3AED;display:block;margin-bottom:8px">
+      Confirme a senha:
+    </label>
+    <input class="config-input" type="password" id="confirma-senha" placeholder="Confirme a senha" maxlength="20">
+    <button class="config-btn" onclick="salvarSenha()">💾 Salvar senha</button>
+    <button class="config-btn-sair" onclick="sairApp()">🚪 Sair do app</button>
     <div class="config-erro" id="config-erro"></div>
   </div>
 </div>
 
 <script>
-  const K_SENHA   = "responde_ai_senha";
-  const K_AUTH    = "responde_ai_auth";
+  const K_AUTH = "responde_ai_auth";
+  const K_SENHA = "responde_ai_senha";
+
   const RESPOSTAS = [
     {
       cat: 'recuperacao',
@@ -323,11 +426,13 @@
 
   let catAtiva = 'todas';
 
-  function checkAuth(){
+  function init(){
     const auth = localStorage.getItem(K_AUTH);
     if(!auth){
       window.location.href = "/index.html";
+      return;
     }
+    renderRespostas();
   }
 
   function getNome(){
@@ -335,7 +440,11 @@
   }
 
   function aplicarNome(txt){
-    return txt.replace(/|$nome$|/g, getNome());
+    return txt.replace(/|
+$
+nome
+$
+|/g, getNome());
   }
 
   function filtrar(cat, btn){
@@ -347,10 +456,13 @@
 
   function renderRespostas(){
     const lista = document.getElementById('lista-respostas');
-    const filtered = catAtiva === 'todas' ? RESPOSTAS : RESPOSTAS.filter(f => f.cat === catAtiva);
+    const filtered = catAtiva === 'todas'
+      ? RESPOSTAS
+      : RESPOSTAS.filter(f => f.cat === catAtiva);
 
     if(!filtered.length){
-      lista.innerHTML = `<div class="vazio"><div class="emoji">🤖</div><p>Nenhuma resposta nessa categoria.</p></div>`;
+      lista.innerHTML =
+        `<div class="vazio"><div class="emoji">🤖</div><p>Nenhuma resposta nessa categoria.</p></div>`;
       return;
     }
 
@@ -359,10 +471,19 @@
         <div class="resposta-header">
           <span class="resposta-titulo">${f.titulo}</span>
         </div>
-        <div class="resposta-texto" id="ftexto-${i}">${aplicarNome(f.texto)}</div>
-        <div style="padding:0 16px 8px;font-size:0.75rem;color:var(--cinza);font-style:italic;">💡 ${f.dica}</div>
+        <div class="resposta-texto" id="ftexto-${i}">
+          ${aplicarNome(f.texto)}
+        </div>
+        <div style="padding:0 16px 8px;
+                    font-size:0.75rem;
+                    color:var(--cinza);
+                    font-style:italic;">
+          💡 ${f.dica}
+        </div>
         <div class="resposta-footer">
-          <button class="btn-copiar" id="btn-${i}" onclick="copiar(${i})">📋 Copiar para WhatsApp</button>
+          <button class="btn-copiar" id="btn-${i}" onclick="copiar(${i})">
+            📋 Copiar para WhatsApp
+          </button>
         </div>
       </div>
     `).join('');
@@ -372,8 +493,62 @@
     const el  = document.getElementById(`ftexto-${i}`);
     const btn = document.getElementById(`btn-${i}`);
     const txt = el.innerText;
+
     navigator.clipboard.writeText(txt).catch(() => {
       const ta = document.createElement('textarea');
-      ta.value = txt; document.body.appendChild(ta);
-      ta.select(); document.execCommand('copy');
+      ta.value = txt;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
 
+    btn.textContent = '✅ Copiado!';
+    btn.classList.add('copiado');
+    setTimeout(() => {
+      btn.textContent = '📋 Copiar para WhatsApp';
+      btn.classList.remove('copiado');
+    }, 2500);
+  }
+
+  function showConfig(){
+    document.getElementById('tela-config').style.display = 'flex';
+    document.getElementById('config-erro').textContent = '';
+    document.getElementById('nova-senha').value = '';
+    document.getElementById('confirma-senha').value = '';
+  }
+
+  function salvarSenha(){
+    const nova = document.getElementById('nova-senha').value.trim();
+    const conf = document.getElementById('confirma-senha').value.trim();
+    const erro = document.getElementById('config-erro');
+
+    if(nova.length < 3){
+      erro.textContent = 'A senha deve ter no mínimo 3 caracteres.';
+      return;
+    }
+    if(nova !== conf){
+      erro.textContent = 'As senhas não coincidem.';
+      return;
+    }
+    localStorage.setItem(K_SENHA, nova);
+    alert('Senha alterada com sucesso! 🎀');
+    document.getElementById('tela-config').style.display = 'none';
+  }
+
+  function sairApp(){
+    localStorage.removeItem(K_AUTH);
+    window.location.href = "/index.html";
+  }
+</script>
+
+<script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw-responde-ai.js');
+    });
+  }
+</script>
+
+</body>
+</html>
