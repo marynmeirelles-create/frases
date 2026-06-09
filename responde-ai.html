@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responde AI 🤖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="/manifest-responde-ai.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Responde AI">
+<meta name="theme-color" content="#7C3AED">
+<style>
+  :root {
+    --roxo: #7C3AED;
+    --rosa: #FF1493;
+    --verde: #1DD1A1;
+    --roxo-claro: #EDE9FE;
+    --rosa-claro: #FFE8F5;
+    --verde-claro: #D1FAE5;
+    --texto: #1F2937;
+    --cinza: #6B7280;
+    --sombra: 0 4px 24px rgba(124,58,237,0.13);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #F3E8FF 0%, #FCE7F3 50%, #D1FAE5 100%);
+    min-height: 100vh;
+    color: var(--texto);
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #7C3AED, #FF1493);
+    padding: 24px 20px 20px; text-align: center; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .header-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; position: relative; z-index: 1; }
+  .header-logo { width: 44px; height: 44px; border-radius: 12px; object-fit: contain; }
+  .header-subtitle { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 2px; }
+  .header-title { font-size: 1.7rem; color: white; position: relative; z-index: 1; }
+  .header-description { color: rgba(255,255,255,0.85); font-size: 0.85rem; margin-top: 4px; position: relative; z-index: 1; }
+
+  .btn-config {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(255,255,255,0.2); border: none; border-radius: 50%;
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: white; cursor: pointer; transition: background 0.2s;
+    z-index: 2;
+  }
+  .btn-config:active { background: rgba(255,255,255,0.3); }
+
+  .main { max-width: 600px; margin: 0 auto; padding: 20px 16px 100px; }
+
+  /* CAMPO NOME */
+  .card-nome {
+    background: white; border-radius: var(--radius);
+    padding: 18px 20px; box-shadow: var(--sombra); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .card-nome label { font-size: 0.82rem; font-weight: 800; color: var(--roxo); white-space: nowrap; }
+  .card-nome input {
+    flex: 1; border: 2px solid #EDE9FE; border-radius: 10px;
+    padding: 10px 14px; font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem; color: var(--texto); background: var(--roxo-claro);
+    outline: none; transition: border-color 0.2s;
+  }
+  .card-nome input:focus { border-color: var(--roxo); }
+
+  /* CATEGORIAS */
+  .titulo-secao {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; color: var(--texto); margin-bottom: 12px;
+  }
+
+  .cats {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .cat-btn {
+    padding: 8px 14px; border-radius: 50px;
+    border: 2px solid #EDE9FE; background: white;
+    font-family: 'Poppins', sans-serif; font-size: 0.8rem;
+    font-weight: 700; color: var(--cinza); cursor: pointer;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .cat-btn.ativa {
+    background: linear-gradient(135deg, #7C3AED, #FF1493);
+    color: white; border-color: transparent;
+  }
+
+  /* CARDS DE RESPOSTA */
+  .resposta-card {
+    background: white; border-radius: var(--radius);
+    box-shadow: var(--sombra); margin-bottom: 14px;
+    overflow: hidden; animation: entrar 0.3s ease;
+    border-left: 4px solid var(--roxo);
+  }
+  @keyframes entrar { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  .resposta-header {
+    padding: 12px 16px 0;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .resposta-titulo {
+    font-size: 0.78rem; font-weight: 800;
+    color: var(--roxo); text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .resposta-texto {
+    padding: 10px 16px 14px;
+    font-size: 0.92rem; color: var(--texto);
+    line-height: 1.75; white-space: pre-wrap; word-break: break-word;
+  }
+
+  .resposta-footer {
+    padding: 0 16px 14px;
+    display: flex; gap: 8px;
+  }
+  .btn-copiar {
+    flex: 1; padding: 10px;
+    background: linear-gradient(135deg, #7C3AED, #FF1493);
+    color: white; border: none; border-radius: 10px;
+    font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+    font-weight: 800; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-copiar.copiado { background: var(--verde); }
+  .btn-copiar:active { transform: scale(0.97); }
+
+  /* COR POR CATEGORIA */
+  .resposta-card.recuperacao { border-left-color: #FF1493; }
+  .resposta-card.atendimento { border-left-color: #7C3AED; }
+  .resposta-card.acompanhamento { border-left-color: #1DD1A1; }
+  .resposta-card.objecoes { border-left-color: #F59E0B; }
+  .resposta-card.relacionamento { border-left-color: #EC4899; }
+
+  /* VAZIO */
+  .vazio { text-align: center; padding: 50px 20px; color: var(--cinza); }
+  .vazio .emoji { font-size: 3rem; margin-bottom: 12px; }
+
+  /* MODAL CONFIG */
+  #tela-config {
+    display: none;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 999; align-items: center; justify-content: center;
+  }
+  .config-box {
+    background: white; border-radius: 24px; padding: 28px;
+    width: 90%; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .config-titulo { font-size: 1.3rem; font-weight: 800; color: var(--roxo); margin-bottom: 20px; }
+  .config-input {
+    width: 100%; padding: 12px 16px; margin-bottom: 12px;
+    border: 2px solid #EDE9FE; border-radius: 10px;
+    font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .config-input:focus { border-color: var(--roxo); }
+  .config-btn {
+    width: 100%; padding: 12px; margin-bottom: 8px;
+    background: linear-gradient(135deg, #7C3AED, #FF1493);
+    color: white; border: none; border-radius: 10px;
+    font-family: 'Poppins', sans-serif; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .config-btn:active { transform: scale(0.98); }
+  .config-btn.sair { background: #EF4444; }
+  .config-erro { color: #EF4444; font-size: 0.85rem; font-weight: 600; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 style="position: relative; z-index: 1;">🤖 Responde AI</h1>
+  <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem; margin-top: 4px; position: relative; z-index: 1;">Respostas prontas para WhatsApp</p>
+  <button class="btn-config" onclick="showConfig()">⚙️</button>
+</header>
+
+<div class="main">
+
+  <!-- NOME -->
+  <div class="card-nome">
+    <label>👤 Cliente:</label>
+    <input type="text" id="nome-cliente" placeholder="Digite o nome da cliente..." oninput="renderRespostas()">
+  </div>
+
+  <!-- CATEGORIAS -->
+  <p class="titulo-secao">Escolha a situação</p>
+  <div class="cats">
+    <button class="cat-btn ativa" onclick="filtrar('todas', this)">🌸 Todas</button>
+    <button class="cat-btn" onclick="filtrar('recuperacao', this)">💌 Recuperar</button>
+    <button class="cat-btn" onclick="filtrar('atendimento', this)">⭐ Atendimento</button>
+    <button class="cat-btn" onclick="filtrar('acompanhamento', this)">📞 Acompanhamento</button>
+    <button class="cat-btn" onclick="filtrar('objecoes', this)">💬 Objeções</button>
+    <button class="cat-btn" onclick="filtrar('relacionamento', this)">💝 Relacionamento</button>
+  </div>
+
+  <!-- RESPOSTAS -->
+  <div id="lista-respostas"></div>
+
+</div>
+
+<!-- MODAL CONFIG -->
+<div id="tela-config">
+  <div class="config-box">
+    <div class="config-titulo">⚙️ Configurações</div>
+    <label style="font-size:0.85rem;font-weight:600;color:var(--roxo);display:block;margin-bottom:8px;">Nova senha</label>
+    <input type="password" id="nova-senha" class="config-input" placeholder="Digite a nova senha" maxlength="20">
+    <label style="font-size:0.85rem;font-weight:600;color:var(--roxo);display:block;margin-bottom:8px;">Confirmar senha</label>
+    <input type="password" id="confirma-senha" class="config-input" placeholder="Confirme a senha" maxlength="20">
+    <button class="config-btn" onclick="salvarSenha()">Salvar nova senha</button>
+    <button class="config-btn sair" onclick="sairApp()">Sair do App</button>
+    <div class="config-erro" id="config-erro"></div>
+  </div>
+</div>
+
+<script>
+  const K_SENHA = "responde_ai_senha";
+  const K_AUTH = "responde_ai_auth";
+
+  const RESPOSTAS = [
+    {
+      cat: 'recuperacao',
+      titulo: 'Primeira abordagem após sumir',
+      dica: 'Envie após 3-5 dias sem contato',
+      texto: `Oi [nome]! Tudo bem? 😊\nPassando para saber se ainda tem interesse no projeto que conversamos.\nFico feliz em esclarecer qualquer dúvida ou ajustar conforme sua necessidade!\nEstou à disposição! 🤖`
+    },
+    {
+      cat: 'recuperacao',
+      titulo: 'Follow-up com leveza',
+      dica: 'Segunda tentativa — sem pressão',
+      texto: `Oi [nome]! Não quero incomodar, mas gostaria de saber se posso ajudá-la em algo.\nCaso tenha interesse em conversar, estarei por aqui! 💌`
+    },
+    {
+      cat: 'recuperacao',
+      titulo: 'Reabrindo conversa após tempo',
+      dica: 'Quando a cliente some por semanas',
+      texto: `Oi [nome]! Quanto tempo! Tudo bem com você?\nCaso ainda esteja interessada, posso enviar uma proposta atualizada.\nSerá um prazer trabalhar com você! 🌸`
+    },
+    {
+      cat: 'atendimento',
+      titulo: 'Boas-vindas calorosa',
+      dica: 'Primeira mensagem após venda',
+      texto: `Oi [nome]! Muito obrigada por confiar em mim! 🎉\nEstou muito animada para começar seu projeto.\nQualquer dúvida durante o processo, é só chamar! 💝`
+    },
+    {
+      cat: 'atendimento',
+      titulo: 'Confirmando detalhes',
+      dica: 'Antes de começar o trabalho',
+      texto: `Oi [nome]! Só para confirmar os detalhes:\n- [detalhe 1]\n- [detalhe 2]\n- [detalhe 3]\n\nTudo certo? Qualquer ajuste, me avisa! 😊`
+    },
+    {
+      cat: 'atendimento',
+      titulo: 'Explicando o processo',
+      dica: 'Para tranquilizar a cliente',
+      texto: `Oi [nome]! Aqui está como vamos trabalhar:\n\n1️⃣ Você me envia os detalhes\n2️⃣ Eu crio e envio para aprovação\n3️⃣ Você aprova ou solicita ajustes\n4️⃣ Entrega final!\n\nEstou aqui para cada passo! 🤖`
+    },
+    {
+      cat: 'acompanhamento',
+      titulo: 'Atualizando sobre o progresso',
+      dica: 'Durante o trabalho',
+      texto: `Oi [nome]! Passando para avisar que seu projeto está em andamento! 🚀\nEstá ficando lindo e em breve envio para você aprovar.\nQualquer dúvida, estou aqui! 😊`
+    },
+    {
+      cat: 'acompanhamento',
+      titulo: 'Enviando para aprovação',
+      dica: 'Quando o trabalho está pronto',
+      texto: `Oi [nome]! Seu projeto ficou pronto! 🎨\nEm anexo estão os arquivos para você revisar.\nMe fala o que acha e se precisa de algum ajuste! 💌`
+    },
+    {
+      cat: 'acompanhamento',
+      titulo: 'Lembrete gentil de prazo',
+      dica: 'Quando está próximo do deadline',
+      texto: `Oi [nome]! Só passando para lembrar que a entrega está prevista para [data].\nEstou no prazo e tudo corre bem!\nQualquer dúvida, é só chamar! 🌸`
+    },
+    {
+      cat: 'objecoes',
+      titulo: 'Respondendo "está caro"',
+      dica: 'Quando a cliente acha o preço alto',
+      texto: `Oi [nome]! Entendo que o investimento pesa, e fico feliz que tenha gostado! 😊\nCada projeto é personalizado e feito com muito cuidado.\nO valor reflete o tempo e a qualidade envolvidos.\nPosso oferecer uma alternativa se quiser! 💝`
+    },
+    {
+      cat: 'objecoes',
+      titulo: 'Oferecendo alternativa',
+      dica: 'Sem abrir exceção no preço',
+      texto: `O que posso fazer é ajustar a proposta:\n- Reduzir escopo\n- Parcelar o pagamento\n- Oferecer pacote com desconto\n\nQual opção faz mais sentido para você? 😊`
+    },
+    {
+      cat: 'objecoes',
+      titulo: 'Cliente comparando com concorrente',
+      dica: 'Quando diz que outra cobra menos',
+      texto: `Entendo! Cada profissional tem sua forma de trabalhar.\nO que diferencia meu trabalho é:\n✨ Personalização completa\n✨ Comunicação clara\n✨ Prazos respeitados\n\nSe fizer sentido, fico feliz em atender! 🌸`
+    },
+    {
+      cat: 'relacionamento',
+      titulo: 'Agradecendo a confiança',
+      dica: 'Após conclusão do projeto',
+      texto: `Oi [nome]! Muito obrigada por confiar em mim! 🙏\nFoi um prazer trabalhar com você.\nQualquer coisa no futuro, é só chamar! 💝`
+    },
+    {
+      cat: 'relacionamento',
+      titulo: 'Pedindo indicação',
+      dica: 'Quando o projeto saiu perfeito',
+      texto: `Oi [nome]! Fico muito feliz que tenha amado o resultado! 🎉\nSe conhecer alguém que possa se beneficiar do meu trabalho, fico grata pela indicação! 💌\nMeu trabalho é feito com muito amor! 🌸`
+    },
+    {
+      cat: 'relacionamento',
+      titulo: 'Mantendo contato',
+      dica: 'Periodicamente com clientes antigos',
+      texto: `Oi [nome]! Passando com carinho para saber como você está! 😊\nTenho novos serviços que podem te interessar.\nQualquer coisa, é só chamar! 💝`
+    },
+  ];
+
+  let catAtiva = 'todas';
+
+  function checkAuth(){
+    const auth = localStorage.getItem(K_AUTH);
+    if(!auth){
+      window.location.href = "/index.html";
+    }
+  }
+
+  function getNome(){
+    return document.getElementById('nome-cliente').value.trim() || '[nome]';
+  }
+
+  function aplicarNome(txt){
+    return txt.replace(/|$nome$|/g, getNome());
+  }
+
+  function filtrar(cat, btn){
+    catAtiva = cat;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('ativa'));
+    btn.classList.add('ativa');
+    renderRespostas();
+  }
+
+  function renderRespostas(){
+    const lista = document.getElementById('lista-respostas');
+    const filtered = catAtiva === 'todas' ? RESPOSTAS : RESPOSTAS.filter(f => f.cat === catAtiva);
+
+    if(!filtered.length){
+      lista.innerHTML = `<div class="vazio"><div class="emoji">🤖</div><p>Nenhuma resposta nessa categoria.</p></div>`;
+      return;
+    }
+
+    lista.innerHTML = filtered.map((f, i) => `
+      <div class="resposta-card ${f.cat}">
+        <div class="resposta-header">
+          <span class="resposta-titulo">${f.titulo}</span>
+        </div>
+        <div class="resposta-texto" id="ftexto-${i}">${aplicarNome(f.texto)}</div>
+        <div style="padding:0 16px 8px;font-size:0.75rem
+
